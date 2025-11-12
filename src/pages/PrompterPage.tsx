@@ -10,7 +10,7 @@ interface PrompterPageProps {
 export function PrompterPage({ text, settings, onNavigate }: PrompterPageProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
-  const [isAutoScrolling, setIsAutoScrolling] = useState(settings.autoScroll);
+  const [isAutoScrolling, setIsAutoScrolling] = useState(false);
   const scrollIntervalRef = useRef<number | null>(null);
 
   // Calculate scroll speed: 0-100 maps to 0.5px to 10px per frame
@@ -25,7 +25,7 @@ export function PrompterPage({ text, settings, onNavigate }: PrompterPageProps) 
           const currentScroll = containerRef.current.scrollTop;
           
           if (currentScroll < maxScroll) {
-            containerRef.current.scrollTop += pixelsPerFrame;
+            containerRef.current.scrollTop += pixelsPerFrame; // 4 is the speed multiplier
           } else {
             // Reached bottom, stop auto-scroll
             setIsAutoScrolling(false);
@@ -48,6 +48,7 @@ export function PrompterPage({ text, settings, onNavigate }: PrompterPageProps) 
 
   const getContainerFlipStyles = () => {
     const styles: React.CSSProperties = {};
+    styles.backgroundColor = settings.bgColor;
     switch (settings.flipMode) {
       case 'horizontal':
         // Flip container horizontally: scale(-1, 1) means -100% horizontal, 100% vertical
@@ -72,25 +73,25 @@ export function PrompterPage({ text, settings, onNavigate }: PrompterPageProps) 
     <div className="prompter-page">
       <div className="prompter-controls">
         <button
-          className="btn-secondary"
+          className="btn btn-secondary"
           onClick={() => onNavigate('setup')}
         >
           ← Back to Setup
         </button>
         {isAutoScrolling && (
           <button
-            className="btn-warning"
+            className="btn btn-warning"
             onClick={handleStopAutoScroll}
           >
-            Stop Auto Scroll
+            Pause Auto Scroll
           </button>
         )}
         {!isAutoScrolling && settings.autoScroll && (
           <button
-            className="btn-primary"
+            className="btn btn-play"
             onClick={() => setIsAutoScrolling(true)}
           >
-            Resume Auto Scroll
+            Play Auto Scroll
           </button>
         )}
       </div>

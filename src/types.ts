@@ -3,6 +3,7 @@ export interface TeleprompterSettings {
   autoScroll: boolean;
   scrollSpeed: number; // 0 to 100, slow to fast
   fontColor: string; // hex color
+  bgColor: string; // hex color
   flipMode: 'none' | 'horizontal' | 'vertical' | 'both';
 }
 

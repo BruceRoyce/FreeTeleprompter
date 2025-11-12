@@ -8,9 +8,10 @@ import './styles/index.css';
 const defaultSettings: TeleprompterSettings = {
   fontSize: 8,
   autoScroll: false,
-  scrollSpeed: 50,
+  scrollSpeed: 10,
   fontColor: '#d3d3d3', // light gray
-  flipMode: 'none',
+  bgColor: '#000000', // black
+  flipMode: 'horizontal',
 };
 
 function App() {

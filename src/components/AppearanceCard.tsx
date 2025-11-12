@@ -16,7 +16,7 @@ export function AppearanceCard({ settings, onSettingsChange }: AppearanceCardPro
 
   return (
     <div className="card">
-      <h3>Appearance</h3>
+      <h3>Mirroring</h3>
       <div className="card-content">
         <div className="setting-item">
           <label>Flip/Mirror Mode</label>

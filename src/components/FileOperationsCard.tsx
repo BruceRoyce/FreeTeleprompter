@@ -15,9 +15,10 @@ export function FileOperationsCard({
 }: FileOperationsCardProps) {
   return (
     <div className="card">
-      <h3>File Operations</h3>
+      <h3>Load/Save</h3>
       <div className="card-content">
         <div className="button-group">
+        <div className="group-title">File</div>
           <button className="btn" onClick={onLoadText}>
             Load Text File
           </button>
@@ -25,7 +26,9 @@ export function FileOperationsCard({
             Save Text File
           </button>
         </div>
+
         <div className="button-group">
+        <div className="group-title">Project</div>
           <button className="btn" onClick={onSaveProject}>
             Save Project
           </button>

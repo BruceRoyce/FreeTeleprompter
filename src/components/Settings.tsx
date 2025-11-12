@@ -1,12 +1,14 @@
 import React from 'react';
 import { TeleprompterSettings } from '../types';
 
+import { SettingItem, SettingsCard } from './settings/index';
+
 interface SettingsCardProps {
   settings: TeleprompterSettings;
   onSettingsChange: (settings: TeleprompterSettings) => void;
 }
 
-export function SettingsCard({ settings, onSettingsChange }: SettingsCardProps) {
+export function Settings({ settings, onSettingsChange }: SettingsCardProps) {
   const handleFontSizeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     onSettingsChange({
       ...settings,
@@ -28,18 +30,23 @@ export function SettingsCard({ settings, onSettingsChange }: SettingsCardProps) 
     });
   };
 
-  const handleColorChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFontColorChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     onSettingsChange({
       ...settings,
       fontColor: e.target.value,
     });
   };
 
+  const handleBgColorChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    onSettingsChange({
+      ...settings,
+      bgColor: e.target.value,
+    });
+  };
+
   return (
-    <div className="card">
-      <h3>Settings</h3>
-      <div className="card-content">
-        <div className="setting-item">
+    <SettingsCard cardTitle="Settings">
+    <SettingItem>
           <label htmlFor="fontSize">
             Font Size: {settings.fontSize.toFixed(1)}rem
           </label>
@@ -53,9 +60,9 @@ export function SettingsCard({ settings, onSettingsChange }: SettingsCardProps) 
             onChange={handleFontSizeChange}
             className="slider"
           />
-        </div>
+        </SettingItem>
 
-        <div className="setting-item">
+        <SettingItem>
           <label htmlFor="autoScroll" className="checkbox-label">
             <input
               id="autoScroll"
@@ -65,14 +72,15 @@ export function SettingsCard({ settings, onSettingsChange }: SettingsCardProps) 
             />
             <span>Auto Scroll</span>
           </label>
-        </div>
+        </SettingItem>
 
         {settings.autoScroll && (
-          <div className="setting-item">
+          <SettingItem>
             <label htmlFor="scrollSpeed">
               Scroll Speed: {settings.scrollSpeed}%
             </label>
             <input
+            disabled={!settings.autoScroll}
               id="scrollSpeed"
               type="range"
               min="0"
@@ -82,24 +90,38 @@ export function SettingsCard({ settings, onSettingsChange }: SettingsCardProps) 
               onChange={handleScrollSpeedChange}
               className="slider"
             />
-          </div>
+          </SettingItem>
         )}
 
-        <div className="setting-item">
+        <SettingItem>
           <label htmlFor="fontColor">Font Color</label>
           <div className="color-picker-container">
             <input
               id="fontColor"
               type="color"
               value={settings.fontColor}
-              onChange={handleColorChange}
+              onChange={handleFontColorChange}
               className="color-picker"
             />
             <span className="color-value">{settings.fontColor}</span>
           </div>
-        </div>
-      </div>
-    </div>
+        </SettingItem>
+
+        <SettingItem>
+          <label htmlFor="backgroundColor">Background Color</label>
+          <div className="color-picker-container">
+            <input
+              id="backgroundColor"
+              type="color"
+              value={settings.bgColor}
+              onChange={handleBgColorChange}
+              className="color-picker"
+            />
+            <span className="color-value">{settings.bgColor}</span>
+          </div>
+        </SettingItem>
+    </SettingsCard>
+    
   );
 }
 

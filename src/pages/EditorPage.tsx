@@ -25,13 +25,14 @@ export function EditorPage({ text, onTextChange, onNavigate }: EditorPageProps) 
   return (
     <div className="editor-page" style={{ transform: 'none' }}>
       <div className="editor-header">
+        <h2>Edit Script</h2>
+        
         <button
-          className="btn-secondary"
+          className="btn btn-primary"
           onClick={() => onNavigate('setup')}
         >
-          ← Back to Setup
+          ← Save & Go Back to Setup
         </button>
-        <h2>Edit Script</h2>
       </div>
 
       <div

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Page, TeleprompterSettings, TeleprompterProject } from '../types';
 import { FileOperationsCard } from '../components/FileOperationsCard';
-import { SettingsCard } from '../components/SettingsCard';
+import { Settings } from '../components/Settings';
 import { AppearanceCard } from '../components/AppearanceCard';
 import * as fileService from '../services/fileService';
 
@@ -102,7 +102,7 @@ export function SetupPage({
   return (
     <div className="setup-page">
       <header className="setup-header">
-        <h1>Teleprompter</h1>
+        <h1>Jinni's Teleprompter</h1>
         <p>Configure your teleprompter settings</p>
       </header>
 
@@ -120,7 +120,7 @@ export function SetupPage({
           onLoadProject={handleLoadProject}
         />
 
-        <SettingsCard
+        <Settings
           settings={settings}
           onSettingsChange={onSettingsChange}
         />
@@ -132,10 +132,10 @@ export function SetupPage({
       </div>
 
       <div className="setup-actions">
-        <button className="btn-secondary" onClick={() => onNavigate('editor')}>
+        <button className="btn btn-secondary" onClick={() => onNavigate('editor')}>
           Edit Script
         </button>
-        <button className="btn-primary" onClick={handleRun}>
+        <button className="btn btn-primary" onClick={handleRun}>
           Run Teleprompter
         </button>
       </div>
