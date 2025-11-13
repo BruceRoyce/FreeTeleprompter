@@ -5,6 +5,7 @@ export interface TeleprompterSettings {
   scrollSpeed: number; // 0 to 100, slow to fast
   fontColor: string; // hex color
   bgColor: string; // hex color
+  instructionsColor: string; // hex color
   flipMode: 'none' | 'horizontal' | 'vertical' | 'both';
 }
 

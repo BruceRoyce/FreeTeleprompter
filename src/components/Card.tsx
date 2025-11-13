@@ -2,7 +2,7 @@
 
 
 
-export function SettingsCard({cardTitle, children}: {cardTitle: string, children: React.ReactNode}) {
+export function Card({cardTitle, children}: {cardTitle: string, children: React.ReactNode}) {
   return (
     <div className="card">
       <h3>{cardTitle}</h3>

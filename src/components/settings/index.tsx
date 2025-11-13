@@ -1,2 +1,2 @@
 export * from './SettingItem';
-export * from './SettingsCard';
+export * from './SettingItemsGroup';

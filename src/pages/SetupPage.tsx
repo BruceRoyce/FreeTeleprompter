@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Page, TeleprompterSettings, TeleprompterProject } from '../types';
 import { FileOperationsCard } from '../components/FileOperationsCard';
-import { Settings } from '../components/Settings';
+import { SettingsCard } from '../components/SettingsCard';
 import { AppearanceCard } from '../components/AppearanceCard';
 import * as fileService from '../services/fileService';
 
@@ -120,7 +120,7 @@ export function SetupPage({
           onLoadProject={handleLoadProject}
         />
 
-        <Settings
+        <SettingsCard
           settings={settings}
           onSettingsChange={onSettingsChange}
         />

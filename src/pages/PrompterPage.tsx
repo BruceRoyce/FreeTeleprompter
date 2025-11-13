@@ -112,11 +112,19 @@ export function PrompterPage({ script: text, settings, onNavigate }: PrompterPag
             color: settings.fontColor,
           }}
         >
+          <div className="script-ends">
+        <p>- SCRIPT BEGINS -</p>
+      </div>
           {text.split('\n').map((line, index) => (
             <div key={index} className="prompter-line" dangerouslySetInnerHTML={{ __html: line  || '\u00A0'}}>
             </div>
           ))}
+      <div className="script-ends">
+        <p>- SCRIPT ENDS -</p>
+      </div>
+
         </div>
+
       </div>
     </div>
   );

@@ -12,6 +12,7 @@ const defaultSettings: TeleprompterSettings = {
   scrollSpeed: 10,
   fontColor: '#d3d3d3', // light gray
   bgColor: '#000000', // black
+  instructionsColor: '#e0e000', // yellow
   flipMode: 'none',
 };
 

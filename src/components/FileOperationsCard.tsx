@@ -1,5 +1,5 @@
-import React from 'react';
-
+import { Card } from "./Card";
+import { SettingItemsGroup } from "./settings/index";
 interface FileOperationsCardProps {
   onLoadText: () => void;
   onSaveText: () => void;
@@ -14,30 +14,29 @@ export function FileOperationsCard({
   onLoadProject,
 }: FileOperationsCardProps) {
   return (
-    <div className="card">
-      <h3>Load/Save</h3>
-      <div className="card-content">
-        <div className="button-group">
-        <div className="group-title">File</div>
-          <button className="btn" onClick={onLoadText}>
-            Load Text File
-          </button>
-          <button className="btn" onClick={onSaveText}>
-            Save Text File
-          </button>
-        </div>
+    <Card cardTitle="Load/Save">
+      <SettingItemsGroup legend="File">
 
-        <div className="button-group">
-        <div className="group-title">Project</div>
-          <button className="btn" onClick={onSaveProject}>
-            Save Project
-          </button>
-          <button className="btn" onClick={onLoadProject}>
-            Load Project
-          </button>
-        </div>
+      <div className="button-group">
+        <button className="btn" onClick={onLoadText}>
+          Load File
+        </button>
+        <button className="btn" onClick={onSaveText}>
+          Save File
+        </button>
       </div>
-    </div>
+      </SettingItemsGroup>
+      
+ <SettingItemsGroup legend="Project">
+      <div className="button-group">
+        <button className="btn" onClick={onLoadProject}>
+          Load Project
+        </button>
+        <button className="btn" onClick={onSaveProject}>
+          Save Project
+        </button>
+      </div>
+      </SettingItemsGroup>
+    </Card>
   );
 }
-

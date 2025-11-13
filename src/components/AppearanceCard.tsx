@@ -1,13 +1,17 @@
-import React from 'react';
-import { TeleprompterSettings } from '../types';
+import { Card } from "./Card";
+import { SettingItemsGroup, SettingItem } from "./settings/index";
+import { TeleprompterSettings } from "../types";
 
 interface AppearanceCardProps {
   settings: TeleprompterSettings;
   onSettingsChange: (settings: TeleprompterSettings) => void;
 }
 
-export function AppearanceCard({ settings, onSettingsChange }: AppearanceCardProps) {
-  const handleFlipModeChange = (mode: TeleprompterSettings['flipMode']) => {
+export function AppearanceCard({
+  settings,
+  onSettingsChange,
+}: AppearanceCardProps) {
+  const handleFlipModeChange = (mode: TeleprompterSettings["flipMode"]) => {
     onSettingsChange({
       ...settings,
       flipMode: mode,
@@ -15,56 +19,56 @@ export function AppearanceCard({ settings, onSettingsChange }: AppearanceCardPro
   };
 
   return (
-    <div className="card">
-      <h3>Mirroring</h3>
-      <div className="card-content">
-        <div className="setting-item">
-          <label>Flip/Mirror Mode</label>
-          <div className="radio-group">
-            <label className="radio-label">
-              <input
-                type="radio"
-                name="flipMode"
-                value="none"
-                checked={settings.flipMode === 'none'}
-                onChange={() => handleFlipModeChange('none')}
-              />
-              <span>Normal</span>
+    <Card cardTitle="Mirroring">
+        <div className="radio-group">
+      <SettingItemsGroup legend="Mirroring">
+          <SettingItem>
+            <label>No Mirroring</label>
+            <input
+              type="radio"
+              name="flipMode"
+              value="none"
+              checked={settings.flipMode === "none"}
+              onChange={() => handleFlipModeChange("none")}
+            />
+          </SettingItem>
+          <SettingItem>
+            <label>Flip Horizontally</label>
+            <input
+              type="radio"
+              name="flipMode"
+              value="horizontal"
+              checked={settings.flipMode === "horizontal"}
+              onChange={() => handleFlipModeChange("horizontal")}
+            />
+          </SettingItem>
+          
+          <SettingItem>
+            <label>
+           Flip Vertically
             </label>
-            <label className="radio-label">
-              <input
-                type="radio"
-                name="flipMode"
-                value="horizontal"
-                checked={settings.flipMode === 'horizontal'}
-                onChange={() => handleFlipModeChange('horizontal')}
-              />
-              <span>Flip Horizontally</span>
-            </label>
-            <label className="radio-label">
-              <input
-                type="radio"
-                name="flipMode"
-                value="vertical"
-                checked={settings.flipMode === 'vertical'}
-                onChange={() => handleFlipModeChange('vertical')}
-              />
-              <span>Flip Vertically</span>
-            </label>
-            <label className="radio-label">
-              <input
-                type="radio"
-                name="flipMode"
-                value="both"
-                checked={settings.flipMode === 'both'}
-                onChange={() => handleFlipModeChange('both')}
-              />
-              <span>Flip Both</span>
-            </label>
-          </div>
+            <input
+              type="radio"
+              name="flipMode"
+              value="vertical"
+              checked={settings.flipMode === "vertical"}
+              onChange={() => handleFlipModeChange("vertical")}
+            />
+            </SettingItem>
+            <SettingItem>
+          <label>
+           Flip Both <span className="tiny">(Horizontally & Vertically)</span>
+            </label>  
+            <input
+              type="radio"
+              name="flipMode"
+              value="both"
+              checked={settings.flipMode === "both"}
+              onChange={() => handleFlipModeChange("both")}
+            />
+          </SettingItem>
+      </SettingItemsGroup>
         </div>
-      </div>
-    </div>
+    </Card>
   );
 }
-
