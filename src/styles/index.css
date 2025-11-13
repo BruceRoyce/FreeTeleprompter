@@ -385,6 +385,7 @@ body {
   justify-content: center;
   width: 100%;
   height: 100%;
+  position: relative;
 }
 
 .prompter-text {
@@ -457,7 +458,7 @@ body {
 
 .prompter-placemarker {
   --placemarker-height: 4rem;
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 0;
   transform: translateY(-50%);
