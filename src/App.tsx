@@ -7,25 +7,26 @@ import './styles/index.css';
 
 const defaultSettings: TeleprompterSettings = {
   fontSize: 8,
-  autoScroll: false,
+  isAutoScrollSelected: false,
+  isShowingPlacemarker: false,
   scrollSpeed: 10,
   fontColor: '#d3d3d3', // light gray
   bgColor: '#000000', // black
-  flipMode: 'horizontal',
+  flipMode: 'none',
 };
 
 function App() {
   const [currentPage, setCurrentPage] = useState<Page>('setup');
-  const [text, setText] = useState<string>('');
+  const [script, setScript] = useState<string>('');
   const [settings, setSettings] = useState<TeleprompterSettings>(defaultSettings);
 
   const handleLoadProject = (project: TeleprompterProject) => {
-    setText(project.text);
+    setScript(project.text);
     setSettings(project.settings);
   };
 
   const handleUpdateText = (newText: string) => {
-    setText(newText);
+    setScript(newText);
   };
 
   const handleUpdateSettings = (newSettings: TeleprompterSettings) => {
@@ -36,7 +37,7 @@ function App() {
     <div className="app">
       {currentPage === 'setup' && (
         <SetupPage
-          text={text}
+          script={script}
           settings={settings}
           onTextChange={handleUpdateText}
           onSettingsChange={handleUpdateSettings}
@@ -46,14 +47,14 @@ function App() {
       )}
       {currentPage === 'prompter' && (
         <PrompterPage
-          text={text}
+          script={script}
           settings={settings}
           onNavigate={(page) => setCurrentPage(page)}
         />
       )}
       {currentPage === 'editor' && (
         <EditorPage
-          text={text}
+          script={script}
           onTextChange={handleUpdateText}
           onNavigate={(page) => setCurrentPage(page)}
         />

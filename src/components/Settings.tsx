@@ -19,7 +19,7 @@ export function Settings({ settings, onSettingsChange }: SettingsCardProps) {
   const handleAutoScrollChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     onSettingsChange({
       ...settings,
-      autoScroll: e.target.checked,
+      isAutoScrollSelected: e.target.checked,
     });
   };
 
@@ -27,6 +27,13 @@ export function Settings({ settings, onSettingsChange }: SettingsCardProps) {
     onSettingsChange({
       ...settings,
       scrollSpeed: parseInt(e.target.value, 10),
+    });
+  };
+
+  const handleShowPlacemarkerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    onSettingsChange({
+      ...settings,
+      isShowingPlacemarker: e.target.checked,
     });
   };
 
@@ -67,20 +74,20 @@ export function Settings({ settings, onSettingsChange }: SettingsCardProps) {
             <input
               id="autoScroll"
               type="checkbox"
-              checked={settings.autoScroll}
+              checked={settings.isAutoScrollSelected}
               onChange={handleAutoScrollChange}
             />
             <span>Auto Scroll</span>
           </label>
         </SettingItem>
 
-        {settings.autoScroll && (
+        {settings.isAutoScrollSelected && (
           <SettingItem>
             <label htmlFor="scrollSpeed">
               Scroll Speed: {settings.scrollSpeed}%
             </label>
             <input
-            disabled={!settings.autoScroll}
+            disabled={!settings.isAutoScrollSelected}
               id="scrollSpeed"
               type="range"
               min="0"
@@ -92,6 +99,18 @@ export function Settings({ settings, onSettingsChange }: SettingsCardProps) {
             />
           </SettingItem>
         )}
+
+        <SettingItem>
+          <label htmlFor="showPlacemarker" className="checkbox-label">
+            <input
+              id="showPlacemarker"
+              type="checkbox"
+              checked={settings.isShowingPlacemarker}
+              onChange={handleShowPlacemarkerChange}
+            />
+            <span>Show Place Marker</span>
+          </label>
+        </SettingItem>
 
         <SettingItem>
           <label htmlFor="fontColor">Font Color</label>

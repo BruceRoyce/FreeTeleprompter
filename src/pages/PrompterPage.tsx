@@ -2,12 +2,12 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Page, TeleprompterSettings } from '../types';
 
 interface PrompterPageProps {
-  text: string;
+  script: string;
   settings: TeleprompterSettings;
   onNavigate: (page: Page) => void;
 }
 
-export function PrompterPage({ text, settings, onNavigate }: PrompterPageProps) {
+export function PrompterPage({ script: text, settings, onNavigate }: PrompterPageProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
   const [isAutoScrolling, setIsAutoScrolling] = useState(false);
@@ -18,7 +18,7 @@ export function PrompterPage({ text, settings, onNavigate }: PrompterPageProps) 
   const pixelsPerFrame = 0.5 + (scrollSpeed / 100) * 9.5;
 
   useEffect(() => {
-    if (isAutoScrolling && settings.autoScroll) {
+    if (isAutoScrolling && settings.isAutoScrollSelected) {
       const interval = setInterval(() => {
         if (containerRef.current) {
           const maxScroll = containerRef.current.scrollHeight - containerRef.current.clientHeight;
@@ -40,7 +40,7 @@ export function PrompterPage({ text, settings, onNavigate }: PrompterPageProps) 
         }
       };
     }
-  }, [isAutoScrolling, settings.autoScroll, pixelsPerFrame]);
+  }, [isAutoScrolling, settings.isAutoScrollSelected, pixelsPerFrame]);
 
   const handleStopAutoScroll = () => {
     setIsAutoScrolling(false);
@@ -71,6 +71,7 @@ export function PrompterPage({ text, settings, onNavigate }: PrompterPageProps) 
 
   return (
     <div className="prompter-page">
+
       <div className="prompter-controls">
         <button
           className="btn btn-secondary"
@@ -86,7 +87,7 @@ export function PrompterPage({ text, settings, onNavigate }: PrompterPageProps) 
             Pause Auto Scroll
           </button>
         )}
-        {!isAutoScrolling && settings.autoScroll && (
+        {!isAutoScrolling && settings.isAutoScrollSelected && (
           <button
             className="btn btn-play"
             onClick={() => setIsAutoScrolling(true)}
@@ -101,6 +102,8 @@ export function PrompterPage({ text, settings, onNavigate }: PrompterPageProps) 
         className="prompter-container"
         style={getContainerFlipStyles()}
       >
+        {settings.isShowingPlacemarker && (<div className="prompter-placemarker" 
+        style={{ height: `${settings.fontSize * 2}rem` }} />)}
         <div
           ref={textRef}
           className="prompter-text"
@@ -110,8 +113,7 @@ export function PrompterPage({ text, settings, onNavigate }: PrompterPageProps) 
           }}
         >
           {text.split('\n').map((line, index) => (
-            <div key={index} className="prompter-line">
-              {line || '\u00A0'}
+            <div key={index} className="prompter-line" dangerouslySetInnerHTML={{ __html: line  || '\u00A0'}}>
             </div>
           ))}
         </div>

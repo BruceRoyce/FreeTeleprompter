@@ -6,7 +6,7 @@ import { AppearanceCard } from '../components/AppearanceCard';
 import * as fileService from '../services/fileService';
 
 interface SetupPageProps {
-  text: string;
+  script: string;
   settings: TeleprompterSettings;
   onTextChange: (text: string) => void;
   onSettingsChange: (settings: TeleprompterSettings) => void;
@@ -15,7 +15,7 @@ interface SetupPageProps {
 }
 
 export function SetupPage({
-  text,
+  script,
   settings,
   onTextChange,
   onSettingsChange,
@@ -39,7 +39,7 @@ export function SetupPage({
   };
 
   const handleSaveText = async () => {
-    if (!text.trim()) {
+    if (!script.trim()) {
       setError('No text to save');
       setTimeout(() => setError(null), 3000);
       return;
@@ -48,7 +48,7 @@ export function SetupPage({
       setError(null);
       const filename = await fileService.promptForFilename();
       if (filename) {
-        await fileService.saveTextFile(filename, text);
+        await fileService.saveTextFile(filename, script);
         setSuccess('Text file saved successfully');
         setTimeout(() => setSuccess(null), 3000);
       }
@@ -64,7 +64,7 @@ export function SetupPage({
       const filename = await fileService.promptForFilename('teleprompter-project');
       if (filename) {
         const project: TeleprompterProject = {
-          text,
+          text: script,
           settings,
         };
         await fileService.saveProjectFile(filename, project);
@@ -91,7 +91,7 @@ export function SetupPage({
   };
 
   const handleRun = () => {
-    if (!text.trim()) {
+    if (!script.trim()) {
       setError('Please add some text before running the prompter');
       setTimeout(() => setError(null), 3000);
       return;

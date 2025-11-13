@@ -1,25 +1,30 @@
-import React, { useRef, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 import { Page } from '../types';
 
 interface EditorPageProps {
-  text: string;
+  script: string;
   onTextChange: (text: string) => void;
   onNavigate: (page: Page) => void;
 }
 
-export function EditorPage({ text, onTextChange, onNavigate }: EditorPageProps) {
+export function EditorPage({ script, onTextChange, onNavigate }: EditorPageProps) {
   const editorRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (editorRef.current && editorRef.current.textContent !== text) {
-      editorRef.current.textContent = text;
+    if (editorRef.current && editorRef.current.innerHTML !== script) {
+      editorRef.current.innerHTML = script;
     }
-  }, [text]);
+  }, [script]);
 
   const handleInput = () => {
     if (editorRef.current) {
-      onTextChange(editorRef.current.textContent || '');
+      onTextChange(editorRef.current.innerHTML || '');
     }
+  };
+
+  const handleOnNavigate = () => {
+    handleInput();
+    onNavigate('setup');
   };
 
   return (
@@ -29,7 +34,7 @@ export function EditorPage({ text, onTextChange, onNavigate }: EditorPageProps) 
         
         <button
           className="btn btn-primary"
-          onClick={() => onNavigate('setup')}
+          onClick={ handleOnNavigate}
         >
           ← Save & Go Back to Setup
         </button>
@@ -39,11 +44,10 @@ export function EditorPage({ text, onTextChange, onNavigate }: EditorPageProps) 
         ref={editorRef}
         className="editor-content"
         contentEditable
-        onInput={handleInput}
         suppressContentEditableWarning
         style={{ transform: 'none' }}
+        dangerouslySetInnerHTML={{ __html: script }}
       >
-        {text}
       </div>
     </div>
   );
