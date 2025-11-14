@@ -109,6 +109,7 @@ export function PrompterPage({ script: text, settings, onNavigate }: PrompterPag
           className="prompter-text"
           style={{
             fontSize: `${settings.fontSize}rem`,
+            lineHeight: settings.lineHeight ?`${settings.lineHeight* 100}%` : '150%',
             color: settings.fontColor,
           }}
         >

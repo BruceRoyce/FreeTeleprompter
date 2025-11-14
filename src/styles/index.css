@@ -30,6 +30,10 @@ body {
   height: 100%;
 }
 
+.one-line-text {
+  white-space: nowrap;
+}
+
 .app {
   width: 100%;
   height: 100%;
@@ -432,10 +436,10 @@ fieldset hr {
   unicode-bidi: normal;
 }
 
-.prompter-line {
+/* .prompter-line {
   margin-bottom: 1rem;
   min-height: 1.2em;
-}
+} */
 
 /* Editor Page */
 .editor-page {
@@ -555,4 +559,10 @@ fieldset hr {
   line-height: 0;
   font-weight: 500;
   color: #b0b0b0;
+  &:first-child {
+    margin-top: 50vh;
+  }
+  &:last-child {
+    margin-bottom: 50vh;
+  }
 }

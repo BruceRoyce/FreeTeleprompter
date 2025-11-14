@@ -26,9 +26,9 @@
     "window": {
       "title": "Teleprompter",
       "width": 1200,
-      "height": 900,
-      "minWidth": 600,
-      "minHeight": 400,
+      "height": 1000,
+      "minWidth": 800,
+      "minHeight": 480,
       "center": true,
       "fullScreen": false,
       "alwaysOnTop": false,

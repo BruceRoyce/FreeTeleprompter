@@ -1,11 +1,13 @@
 # Jinni's Teleprompter
 
+![alt text](<public/Screenshot 2025-11-14 003340.png>)
+
 A cross-platform desktop teleprompter application built with React, TypeScript, Vite, and Neutralino/Buntralino. Perfect for video production, presentations, and live performances.
 
 ## Features
 
 - **Rich Text Editing**: Edit your scripts with a built-in rich text editor
-- **Customizable Appearance**: 
+- **Customizable Appearance**:
   - Adjustable font size (5-15 rem)
   - Custom font and background colors
   - Customizable instruction text color
@@ -24,12 +26,14 @@ A cross-platform desktop teleprompter application built with React, TypeScript, 
 ## Installation
 
 1. Clone the repository:
+
 ```bash
 git clone <repository-url>
 cd teleprompter
 ```
 
 2. Install dependencies:
+
 ```bash
 bun install
 ```
@@ -43,6 +47,7 @@ bun run dev
 ```
 
 This will:
+
 - Start the Vite development server
 - Launch the Buntralino desktop application
 - Enable hot module replacement for fast development
@@ -56,6 +61,7 @@ bun run build
 ```
 
 This command will:
+
 1. Build the React application using Vite
 2. Package it as a desktop application using Buntralino
 3. Create platform-specific executables in the `build/` directory
@@ -63,6 +69,7 @@ This command will:
 ### Build Output
 
 The build process creates executables for multiple platforms:
+
 - **Windows x64**: `build/Windows x64/teleprompter.exe`
 - **macOS x64**: `build/MacOS x64/teleprompter` (or `build/MacOS x64 App/teleprompter.app`)
 - **macOS arm64**: `build/MacOS arm64/teleprompter` (or `build/MacOS arm64 App/teleprompter.app`)
@@ -78,12 +85,14 @@ If you see warnings about "Resource section" or "pe-library" during the Windows 
 ### Getting Started
 
 1. **Setup Page**: When you first open the app, you'll see the Setup page where you can:
+
    - Load a text file or project file
    - Configure teleprompter settings
    - Customize appearance
    - Navigate to the editor or start the prompter
 
 2. **Editor Page**: Click "Edit Script" to:
+
    - Edit your script text with rich text formatting
    - Save your changes and return to setup
 
@@ -96,17 +105,20 @@ If you see warnings about "Resource section" or "pe-library" during the Windows 
 ### File Operations
 
 #### Loading Text Files
+
 - Click "Load Text File" in the File Operations card
 - Select a `.txt` file from your system
 - The text will be loaded into the editor
 
 #### Saving Text Files
+
 - Enter or edit your script text
 - Click "Save Text File"
 - Enter a filename (without extension)
 - Choose where to save the `.txt` file
 
 #### Saving Projects
+
 - Configure your settings and script
 - Click "Save Project"
 - Enter a filename (without extension)
@@ -114,6 +126,7 @@ If you see warnings about "Resource section" or "pe-library" during the Windows 
 - Projects save both your script text and all settings
 
 #### Loading Projects
+
 - Click "Load Project"
 - Select a previously saved `.json` project file
 - Your script and settings will be restored
@@ -121,16 +134,18 @@ If you see warnings about "Resource section" or "pe-library" during the Windows 
 ### Settings
 
 #### Scroll Settings
+
 - **Auto Scroll**: Enable/disable automatic scrolling
 - **Scroll Speed**: Adjust from 0 (slow) to 100 (fast)
 - **Placemarker**: Show/hide a visual indicator at your reading position
 
 #### Appearance Settings
+
 - **Font Size**: Adjust from 5 to 15 rem
 - **Font Color**: Choose the text color (hex code)
 - **Background Color**: Choose the background color (hex code)
 - **Instructions Color**: Choose the color for instruction text (hex code)
-- **Flip Mode**: 
+- **Flip Mode**:
   - None: Normal display
   - Horizontal: Mirror left-to-right (for teleprompter mirrors)
   - Vertical: Flip top-to-bottom

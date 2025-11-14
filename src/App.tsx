@@ -7,6 +7,7 @@ import './styles/index.css';
 
 const defaultSettings: TeleprompterSettings = {
   fontSize: 8,
+  lineHeight: 1.5,
   isAutoScrollSelected: false,
   isShowingPlacemarker: false,
   scrollSpeed: 10,

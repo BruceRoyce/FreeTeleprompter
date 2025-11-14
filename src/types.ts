@@ -1,5 +1,6 @@
 export interface TeleprompterSettings {
   fontSize: number; // in rem, from 5 to 15
+  lineHeight?: number;
   isAutoScrollSelected: boolean;
   isShowingPlacemarker: boolean;
   scrollSpeed: number; // 0 to 100, slow to fast

@@ -37,7 +37,7 @@ export async function saveTextFile(filename: string, content: string): Promise<v
   await ensureReady();
   try {
     const result = await neutralino.os.showSaveDialog('Save Text File', {
-      defaultPath: filename,
+      defaultPath: `${filename}.txt`,
       filters: [{ name: 'Text Files', extensions: ['txt'] }],
     }) as string | null;
     if (result) {
@@ -57,7 +57,7 @@ export async function saveProjectFile(filename: string, project: TeleprompterPro
   await ensureReady();
   try {
     const result = await neutralino.os.showSaveDialog('Save Project', {
-      defaultPath: filename,
+      defaultPath: `${filename}.json`,
       filters: [{ name: 'JSON Files', extensions: ['json'] }],
     }) as string | null;
     if (result) {

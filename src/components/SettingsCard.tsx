@@ -8,51 +8,41 @@ interface SettingsCardProps {
   onSettingsChange: (settings: TeleprompterSettings) => void;
 }
 
+type SettingKind = "numeric" | "boolean" | "string";
+type SettingName = keyof TeleprompterSettings;
+type SettingValue = string | number | boolean;
+
+type ChangedSetting = {
+  name: SettingName;
+  kind: SettingKind;
+};
+
+
 export function SettingsCard({
   settings,
   onSettingsChange,
 }: SettingsCardProps) {
-  const handleFontSizeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onSettingsChange({
-      ...settings,
-      fontSize: parseFloat(e.target.value),
-    });
-  };
 
-  const handleAutoScrollChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onSettingsChange({
-      ...settings,
-      isAutoScrollSelected: e.target.checked,
-    });
-  };
 
-  const handleScrollSpeedChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onSettingsChange({
-      ...settings,
-      scrollSpeed: parseInt(e.target.value, 10),
-    });
-  };
 
-  const handleShowPlacemarkerChange = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    onSettingsChange({
-      ...settings,
-      isShowingPlacemarker: e.target.checked,
-    });
-  };
+  const handleSettingsChange = (e: React.ChangeEvent<HTMLInputElement>, setting: ChangedSetting) => {
+    let value: SettingValue;
+    
+    switch (setting.kind) {
+      case "numeric":
+        value = parseFloat(e.target.value);
+        break;
+      case "boolean":
+        value = e.target.checked;
+        break;
+      case "string":
+        value = e.target.value;
+        break;
+    }
 
-  const handleFontColorChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     onSettingsChange({
       ...settings,
-      fontColor: e.target.value,
-    });
-  };
-
-  const handleBgColorChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onSettingsChange({
-      ...settings,
-      bgColor: e.target.value,
+      [setting.name]: value,
     });
   };
 
@@ -68,11 +58,27 @@ export function SettingsCard({
             max="15"
             step="0.5"
             value={settings.fontSize}
-            onChange={handleFontSizeChange}
+            onChange={(e) => handleSettingsChange(e, { name: 'fontSize', kind: 'numeric' })}
             className="slider"
           />
           <span className="tiny">
             {settings.fontSize.toFixed(1).padStart(4, "0")}rem
+          </span>
+        </SettingItem>
+        <SettingItem>
+          <label className="one-line-text" htmlFor="lineHeight">Line Height</label>
+          <input
+            id="lineHeight"
+            type="range"
+            min="1"
+            max="2"
+            step="0.1"
+            value={settings.lineHeight}
+            onChange={(e) => handleSettingsChange(e, { name: 'lineHeight', kind: 'numeric' })}
+            className="slider"
+          />
+          <span className="tiny">
+            {settings.lineHeight !== undefined && (settings.lineHeight * 100).toFixed(0).padStart(3, "0")}%
           </span>
         </SettingItem>
       </SettingItemsGroup>
@@ -87,7 +93,7 @@ export function SettingsCard({
             id="autoScroll"
             type="checkbox"
             checked={settings.isAutoScrollSelected}
-            onChange={handleAutoScrollChange}
+            onChange={(e) => handleSettingsChange(e, { name: 'isAutoScrollSelected', kind: 'boolean' })}
           />
         </SettingItem>
         <SettingItem>
@@ -102,7 +108,7 @@ export function SettingsCard({
             max="100"
             step="1"
             value={settings.scrollSpeed}
-            onChange={handleScrollSpeedChange}
+            onChange={(e) => handleSettingsChange(e, { name: 'scrollSpeed', kind: 'numeric' })}
             className="slider"
           />
           <span className="tiny">{settings.scrollSpeed.toString().padStart(3, "0")}%</span>
@@ -111,7 +117,7 @@ export function SettingsCard({
 
       
 
-      <SettingItemsGroup legend="Colors">
+      <SettingItemsGroup legend="Colours">
       <SettingItem>
         <label htmlFor="fontColor">Font</label>
         <div className="color-picker-container">
@@ -119,7 +125,7 @@ export function SettingsCard({
             id="fontColor"
             type="color"
             value={settings.fontColor}
-            onChange={handleFontColorChange}
+            onChange={(e) => handleSettingsChange(e, { name: 'fontColor', kind: 'string' })}
             className="color-picker"
           />
           <span className="color-value">{settings.fontColor}</span>
@@ -133,23 +139,23 @@ export function SettingsCard({
             id="backgroundColor"
             type="color"
             value={settings.bgColor}
-            onChange={handleBgColorChange}
+            onChange={(e) => handleSettingsChange(e, { name: 'bgColor', kind: 'string' })}
             className="color-picker"
           />
           <span className="color-value">{settings.bgColor}</span>
         </div>
         </SettingItem>
       <SettingItem>
-        <label htmlFor="backgroundColor">Instructions</label>
+        <label htmlFor="instructionsColor">Instructions</label>
         <div className="color-picker-container">
           <input
-            id="backgroundColor"
+            id="instructionsColor"
             type="color"
-            value={settings.bgColor}
-            onChange={handleBgColorChange}
+            value={settings.instructionsColor}
+            onChange={(e) => handleSettingsChange(e, { name: 'instructionsColor', kind: 'string' })}
             className="color-picker"
           />
-          <span className="color-value">{settings.bgColor}</span>
+          <span className="color-value">{settings.instructionsColor}</span>
         </div>
         </SettingItem>
       </SettingItemsGroup>
@@ -164,7 +170,7 @@ export function SettingsCard({
             id="showPlacemarker"
             type="checkbox"
             checked={settings.isShowingPlacemarker}
-            onChange={handleShowPlacemarkerChange}
+            onChange={(e) => handleSettingsChange(e, { name: 'isShowingPlacemarker', kind: 'boolean' })}
           />
       </SettingItem>
       </SettingItemsGroup>
